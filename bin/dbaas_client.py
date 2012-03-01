@@ -15,19 +15,20 @@
 import httplib2
 #import urllib.request
 import json
+import argparse
 
 # list all mysql instances for a user
 
 class DBaaSClient(httplib2.Http):
 
-    def __init__(self, url, token=None, api_version = "v1.0", timeout=20):
+    def __init__(self, url, token=None, api_version = "v1.0", timeout=30):
         super(DBaaSClient, self).__init__(timeout=timeout)
         self.url = url
         self.api_version = api_version
         self.token = token
         self.headers = {}
         self.headers['X-Auth-Token'] = self.token
-        self.url_part = self.url + self.api_version + "/dbaasapi"
+        self.url_part = "/".join([self.url,self.api_version,"dbaasapi"])
 
     def _token(self):
         return self.token
@@ -63,7 +64,7 @@ class DBaaSClient(httplib2.Http):
         #construct request json
         self.path = "instances"
         self.db_name = db_name
-        self.create_uri = "/",join([self.url_part,self.path])
+        self.create_uri = "/".join([self.url_part,self.path])
         self.headers['Content-Type'] = 'application/json'
 
         self.request_json = json.dumps({"instance": {"name":self.db_name, "flavorRef":"url_to_flavor_version", "port":"3306",
@@ -81,16 +82,16 @@ class DBaaSClient(httplib2.Http):
         return resp, content
 
     #create snapshot for a mysql instance
-    def create_snap(self, instance_id, snapshot_name):
+    def create_snapshot(self, instance_id, snapshot_name):
         self.instance_id = instance_id
         self.snapshot_name = snapshot_name
         self.path = "snapshots"
-        self.delete_uri = self.url_part + self.path
+        self.snap_uri = self.url_part + self.path
         self.headers['Content-Type'] = 'application/json'
 
         self.request_json = json.dumps({"snapshot": {"instanceId":self.instance_id, "name": self.snapshot_name}})
 
-        resp, content = super(DBaaSClient, self).request(self.create_uri, "POST", self.request_json.encode('utf-8'), headers=self.headers)
+        resp, content = super(DBaaSClient, self).request(self.snap_uri, "POST", self.request_json.encode('utf-8'), headers=self.headers)
         return resp, content
 
     #describe snapshot for a mysql instance
@@ -117,11 +118,16 @@ class DBaaSClient(httplib2.Http):
         self.path = "instances"
         self.delete_uri = "/".join([self.url_part, self.path, self.path])
         self.headers['Content-Type'] = 'application/json'
+        print self.delete_uri
 
         resp, content = super(DBaaSClient, self).request(self.delete_uri, "DELETE", headers=self.headers)
         return resp, content
 
+dbaas_parser = argparse.ArgumentParser()
+dbaas_parser_subparsers = dbaas_parser.add_subparsers(help='commands')
 
+#list mysql instances
+list_instance_parser = dbaas_parser_subparsers.add_parser
 #dbaas_http = httplib2.Http(".cache")
 #resp, content = dbaas_http.request("http://15.185.163.25:8775/v1.0/dbaasapi/instances", "DELETE", headers= {'X-Auth-Token':'abc:123'})
 #    url = "http://15.185.163.25:8775"
@@ -140,22 +146,26 @@ dbaas_demo_url = "http://15.185.163.25:8775/"
 
 dbaas = DBaaSClient(dbaas_demo_url, "abc:123")
 
-dbaas_resp = dbaas.list_instances
 
-print dbaas_resp
+dbaas_resq = dbaas.list_instances()
+
+print dbaas_resq
 
 # create a new mysql instance
 
-#dbaas_create = dbaas.create_instance("lee_test")
+#dbaas_create = dbaas.create_instance("lee_test2")
 #print dbaas_create
 
 # reset password
 
 # create snapshot
+dbaas_create_snapshot = dbaas.create_snapshot("88b83199-4bab-4fa9-93e5-8b99da452952", "snap1")
+print dbaas_create_snapshot
 
 # delete snapshot
 
+
 # destroy mysql instance
-#dbaas_delete = dbaas.delete_instance("82287bb1-e266-4653-8165-686f802bee15")
+#dbaas_delete = dbaas.delete_instance("5bacdbd1-1cf5-4e7e-ac97-3fff5365ff85")
 
 #print dbaas_delete
