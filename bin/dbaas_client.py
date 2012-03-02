@@ -1,4 +1,6 @@
-# Copyright 2011 OpenStack, LLC
+#!/usr/local/bin/python
+
+# Copyright 2012 HP Software, LLC"
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -115,7 +117,7 @@ dbaas_parser_subparsers = dbaas_parser.add_subparsers(help='commands')
 
 #list mysql instances
 list_instance_parser = dbaas_parser_subparsers.add_parser('list_instances', help='List MySQL instances')
-list_instance_parser.add_argument('--command', action='store', default='list_instance')
+list_instance_parser.add_argument('--command', action='store', default='list_instances')
 #list_instance_parser.set_defaults(function=dbaas.list_instances)
 
 #create new mysql instance
@@ -156,35 +158,48 @@ delete_instance_parser.add_argument('--command', action='store', default='delete
 
 def main():
     args = dbaas_parser.parse_args()
+    dbaas_command = args.command
+    print dbaas_command
 
-    if args.command == "list_instance":
-        print "list_instance"
-        dbaas.list_instances()
-    elif args.command == "create_instance":
-        print "create_instance --name=" + args.name
-        dbaas.create_instance(args.name)
+    dbaas_options = {"list_instances"    : dbaas.list_instances,
+                     "create_instance"   : dbaas.create_instance(args.name),
+                     "describe_instance" : dbaas.describe_instance(args.instance_id),
+                     "create_snapshot"   : dbaas.create_snapshot(args.instance_id, args.snapshot_name),
+                     "list_snapshot"     : dbaas.describe_snapshot(args.instance_id),
+                     "delete_snapshot"   : dbaas.delete_snapshot(args.snapshot_id),
+                     "delete_instance"   : dbaas.delete_instance(args.instance_id)
+                     }
 
-    elif args.command == "describe_instance":
-        print "describe_instance --instance_id=" + args.instance_id
-        dbaas.describe_instance(args.instance_id)
+    dbaas_options[dbaas_command]()
 
-    elif args.command == "create_snapshot":
-        print "create_snapshot --instance_id=" + args.instance_id + " --snapshot_name=" + args.snapshot_name
-        dbaas.create_snapshot(args.instance_id, args.snapshot_name)
+#    if args.command == "list_instance":
+#        print "list_instance"
+#        dbaas.list_instances()
+#    elif args.command == "create_instance":
+#        print "create_instance --name=" + args.name
+#        dbaas.create_instance(args.name)
 
-    elif args.command == "list_snapshot":
-        print "list_snapshot --instance_id=" + str(args.snapshot_id)
-        dbaas.describe_snapshot(args.snapshot_id)
+#    elif args.command == "describe_instance":
+#        print "describe_instance --instance_id=" + args.instance_id
+#        dbaas.describe_instance(args.instance_id)
 
-    elif args.command == "delete_snapshot":
-        print "delete_snapshot --snapshot_id=" + args.snapshot_id
+#    elif args.command == "create_snapshot":
+#        print "create_snapshot --instance_id=" + args.instance_id + " --snapshot_name=" + args.snapshot_name
+#        dbaas.create_snapshot(args.instance_id, args.snapshot_name)
 
-    elif args.command == "delete_instance":
-        print "delete_instance --instance_id=" + args.instance_id
-        dbaas.delete_instance(args.instance_id)
+#    elif args.command == "list_snapshot":
+#        print "list_snapshot --instance_id=" + str(args.snapshot_id)
+#        dbaas.describe_snapshot(args.snapshot_id)
 
-    else:
-        dbaas_parser.parse_args(['-h'])
+#    elif args.command == "delete_snapshot":
+#        print "delete_snapshot --snapshot_id=" + args.snapshot_id
+
+#    elif args.command == "delete_instance":
+#        print "delete_instance --instance_id=" + args.instance_id
+ #       dbaas.delete_instance(args.instance_id)
+
+#    else:
+#        dbaas_parser.parse_args(['-h'])
 
 if __name__ == "__main__":
     main()
