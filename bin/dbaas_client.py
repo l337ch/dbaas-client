@@ -28,8 +28,6 @@ class DBaaSCLI(httplib2.Http):
         self.api_version = api_version
         self.token = token
         self.headers = {}
-        self.headers['X-Auth-Token'] = token
-        self.url_part = "/".join([self.url,self.api_version,"dbaasapi"])
 
     def list_instances(self, instance_id=None):
         path = "instances"
