@@ -1,0 +1,7 @@
+status: 200
+date: Wed, 29 Feb 2012 17:09:19 GMT
+content-length: 154
+content-type: application/json
+content-location: http://15.185.163.25:8775/v1.0/
+
+{"version": {"status": "CURRENT", "updated": "2012-01-01T00:00:00Z", "id": "v1.0", "links": [{"href": "http://15.185.163.25:8775/v1.0/", "rel": "self"}]}}
