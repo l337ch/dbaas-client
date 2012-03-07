@@ -57,7 +57,8 @@ class DBaaSCLI(httplib2.Http):
             table = [['instance_id', 'name', 'status', 'hostname', 'created']]
 
             row = result_json['instance']
-            table.append([str(row['id']), str(row['name']), str(row['status']), str(row['hostname']), str(row['created'])])
+            table.append([str(row['id']), str(row['name']), str(row['status']),
+                          str(row['hostname']), str(row['created'])])
 
         self.pprint_table(table)
 
@@ -74,11 +75,14 @@ class DBaaSCLI(httplib2.Http):
                                         "dbtype":{"name":"mysql", "version":"5.1.2"}, "volume": {"size":"2"}}}
             request_json = json.dumps(create_json)
         else:
-            create_json = {"instance": {"snapshotId": snapshot_id, "name": db_name, "flavorRef":"url_to_flavor_version", "port":"3306",
-                                        "dbtype":{"name":"mysql", "version":"5.1.2"}, "volume": {"size":"2"}}}
+            create_json = {"instance": {"snapshotId": snapshot_id, "name": db_name, "flavorRef":"url_to_flavor_version",
+                                        "port":"3306", "dbtype":{"name":"mysql", "version":"5.1.2"},
+                                        "volume": {"size":"2"}}}
             request_json = json.dumps(create_json)
 
-        resp, content = super(DBaaSCLI, self).request(create_uri, "POST", request_json.encode('utf-8'), headers=self.headers)
+        resp, content = super(DBaaSCLI, self).request(create_uri, "POST", request_json.encode('utf-8'),
+            headers=self.headers)
+
         result_json = json.loads(content)
         #print content
         #print json.dumps(json.loads(content), indent=4)
@@ -99,7 +103,9 @@ class DBaaSCLI(httplib2.Http):
         create_json = {'resetPassword':instance_password}
         request_json = json.dumps(create_json)
 
-        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'), headers=self.headers)
+        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'),
+            headers=self.headers)
+
         print content
         print json.dumps(json.loads(content), indent=4)
         return resp, content
@@ -111,7 +117,9 @@ class DBaaSCLI(httplib2.Http):
         create_json = {'restart':{'type':restart_type}}
         request_json = json.dumps(create_json)
 
-        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'), headers=self.headers)
+        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'),
+            headers=self.headers)
+
         print content
         print json.dumps(json.loads(content), indent=4)
         return resp, content
@@ -123,7 +131,9 @@ class DBaaSCLI(httplib2.Http):
         self.headers['Content-Type'] = 'application/json'
         request_json = json.dumps({"snapshot": {"instanceId":instance_id, "name": snapshot_name}})
 
-        resp, content = super(DBaaSCLI, self).request(snap_uri, "POST", request_json.encode('utf-8'), headers=self.headers)
+        resp, content = super(DBaaSCLI, self).request(snap_uri, "POST", request_json.encode('utf-8'),
+            headers=self.headers)
+
         result_json = content
         print result_json.split("\n")
         print json.dumps(result_json, indent=4)
@@ -134,6 +144,7 @@ class DBaaSCLI(httplib2.Http):
         self.path = "snapshots"
         instance_id = instance_id
         describe_uri = "/".join([self.url_part,self.path]) + "?instance_id=" + str(instance_id)
+        #print describe_uri
 
         resp, content = super(DBaaSCLI, self).request(describe_uri, "GET", headers=self.headers)
         result_json = json.loads(content)
@@ -144,7 +155,8 @@ class DBaaSCLI(httplib2.Http):
         table = [['snapshot_id', 'name', 'status', 'instance_id', 'created']]
         for instances in result_json['snapshots']:
             row = result_json['snapshots'][il]
-            table.append([str(row['id']), str(row['name']), str(row['status']), str(row['instanceId']), str(row['created'])])
+            table.append([str(row['id']), str(row['name']), str(row['status']), str(row['instanceId']),
+                          str(row['created'])])
             il += 1
 
         self.pprint_table(table)
@@ -243,7 +255,6 @@ class ArgDBaaSCLI(DBaaSCLI):
         self.terminate_instance(opts.instance_id)
 
 
-
 dbaas_demo_url = "http://15.185.163.25:8775"
 dbaas = ArgDBaaSCLI(dbaas_demo_url, "abc:123")
 
@@ -251,56 +262,73 @@ dbaas_parser = argparse.ArgumentParser()
 dbaas_subparsers = dbaas_parser.add_subparsers()
 
 #list mysql instances
-list_instance_parser = dbaas_subparsers.add_parser('list_instances', help='List MySQL instances')
-list_instance_parser.add_argument('--instance_id', action='store', required=False, help='MySQL instance_id')
+list_instance_parser = dbaas_subparsers.add_parser('list_instances',
+    help='List MySQL instances')
+list_instance_parser.add_argument('--instance_id', action='store',
+    required=False, help='MySQL instance_id')
 list_instance_parser.set_defaults(func=dbaas.func_list_instances)
 
 #create new mysql instance
-create_instance_parser = dbaas_subparsers.add_parser('create_instance', help='Create a new MySQL instance')
-create_instance_parser.add_argument('--instance_name', action='store', required=True, help='Name for new MySQL instance')
-create_instance_parser.add_argument('--snapshot_id', action='store', help='Snapshot to use for MySQL creation')
+create_instance_parser = dbaas_subparsers.add_parser('create_instance',
+    help='Create a new MySQL instance')
+create_instance_parser.add_argument('--instance_name', action='store',
+    required=True, help='Name for new MySQL instance')
+create_instance_parser.add_argument('--snapshot_id', action='store',
+    help='Snapshot to use for MySQL creation')
 create_instance_parser.set_defaults(func=dbaas.func_create_instance)
 
 #reset mysql password
-reset_password_parser = dbaas_subparsers.add_parser('reset_password', help='Reset MySQL password')
-reset_password_parser.add_argument('--instance_id', action='store', required=True, help='MySQL instance_id')
-reset_password_parser.add_argument('--instance_password', action='store', required=False, help='New MySQL password')
+reset_password_parser = dbaas_subparsers.add_parser('reset_password',
+    help='Reset MySQL password')
+reset_password_parser.add_argument('--instance_id', action='store',
+    required=True, help='MySQL instance_id')
+reset_password_parser.add_argument('--instance_password', action='store',
+    required=False, help='New MySQL password')
 reset_password_parser.set_defaults(func=dbaas.func_reset_password)
 
 #restart mysql(instance)
-restart_instance_parser = dbaas_subparsers.add_parser('restart_instance', help='Reset MySQL password')
-restart_instance_parser.add_argument('--instance_id', action='store', required=True, help='MySQL instance_id')
-restart_instance_parser.add_argument('--restart_type', action='store', required=False, help='Restart MySQL [SOFT|HARD]')
+restart_instance_parser = dbaas_subparsers.add_parser('restart_instance',
+    help='Reset MySQL password')
+restart_instance_parser.add_argument('--instance_id', action='store',
+    required=True, help='MySQL instance_id')
+restart_instance_parser.add_argument('--restart_type', action='store',
+    required=False, help='Restart MySQL [SOFT|HARD]')
 restart_instance_parser.set_defaults(func=dbaas.func_restart_instance)
 
 #create new mysql snapshot
-create_snapshot_parser = dbaas_subparsers.add_parser('create_snapshot', help='Create MySQL snapshot')
-create_snapshot_parser.add_argument('--instance_id', action='store', required=True, help='MySQL instance_id')
-create_snapshot_parser.add_argument('--snapshot_name', action='store', required=True, help='Name of snapshot')
+create_snapshot_parser = dbaas_subparsers.add_parser('create_snapshot',
+    help='Create MySQL snapshot')
+create_snapshot_parser.add_argument('--instance_id', action='store',
+    required=True, help='MySQL instance_id')
+create_snapshot_parser.add_argument('--snapshot_name', action='store',
+    required=True, help='Name of snapshot')
 create_snapshot_parser.set_defaults(func=dbaas.func_create_snapshot)
 
 #list snapshots
-list_snapshot_parser = dbaas_subparsers.add_parser('list_snapshot', help='List all MySQL snapshots')
-list_snapshot_parser.add_argument('--instance_id', action='store', help='Name of snapshot')
+list_snapshot_parser = dbaas_subparsers.add_parser('list_snapshots',
+    help='List all MySQL snapshots')
+list_snapshot_parser.add_argument('--instance_id', action='store',
+    help='MySQL instance_id')
 list_snapshot_parser.set_defaults(func=dbaas.func_list_snapshot)
 
 #delete snapshots
-delete_snapshot_parser = dbaas_subparsers.add_parser('delete_snapshot', help='Delete a MySQL snapshot')
-delete_snapshot_parser.add_argument('--snapshot_id', action='store', required=True, help='MySQL snapshot ID')
+delete_snapshot_parser = dbaas_subparsers.add_parser('delete_snapshot',
+    help='Delete a MySQL snapshot')
+delete_snapshot_parser.add_argument('--snapshot_id', action='store',
+    required=True, help='MySQL snapshot ID')
 delete_snapshot_parser.set_defaults(func=dbaas.func_delete_snapshot)
 
 #terminate mysql instance
-terminate_instance_parser = dbaas_subparsers.add_parser('terminate_instance', help='Delete a MySQL instance')
-terminate_instance_parser.add_argument('--instance_id', action='store', required=True, help='MySQL instance ID')
+terminate_instance_parser = dbaas_subparsers.add_parser('terminate_instance',
+    help='Delete a MySQL instance')
+terminate_instance_parser.add_argument('--instance_id', action='store',
+    required=True, help='MySQL instance ID')
 terminate_instance_parser.set_defaults(func=dbaas.func_terminate_instance)
 
 def main(s=None):
     opts = dbaas_parser.parse_args(s)
     #print "OPTS: " + str(opts)
     opts.func(opts)
-
-#    dbaas_parser.parse_args()
-#    print dbaas_parser.parse_args()
 
 if __name__ == "__main__":
     main()
@@ -312,6 +340,7 @@ if __name__ == "__main__":
     #main(['restart_instance', '--instance_id', 'c2ff4133-c690-4ab4-9939-05db1bcd013c'])
     #main(['list_snapshot'])
     #main(['list_snapshot', '--instance_id', '57c32bf5-5011-413e-9749-27b03963c25e'])
-    #main(['create_snapshot', '--instance_id', '7100cdfa-badd-4469-a9c8-2e6603ea7e41', '--snapshot_name', 'back it up take seven'])
+    #main(['create_snapshot', '--instance_id', '7100cdfa-badd-4469-a9c8-2e6603ea7e41',
+    # '--snapshot_name', 'back it up take seven'])
     #main(['delete_snapshot', '--snapshot_id', 'b626a788-d689-484f-ab14-5469a6c9d526'])
     #main(['terminate_instance', '--instance_id', '92f4af8d-4543-4941-85e2-a224fb67a313'])

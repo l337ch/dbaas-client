@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5006cde2-9d1d-4c51-a432-5c6f7eb6aa32" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dbaas-client.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/.cache/15.185.163.25,8775,v1.0,,1290c14d5eebdba576deebcf1b95c36a" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/dbaas_client" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/pprint_table.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/dbaas_client.py" afterPath="$PROJECT_DIR$/bin/dbaas_client.py" />
     </list>
     <ignored path="dbaas-client.iws" />
@@ -51,7 +39,7 @@
       <file leaf-file-name="dbaas_client.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/dbaas_client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="224" column="65" selection-start="8727" selection-end="8727" vertical-scroll-proportion="-0.5700713">
+            <state line="146" column="9" selection-start="5750" selection-end="5750" vertical-scroll-proportion="-0.14845605">
               <folding>
                 <element signature="e#625#640#0" expanded="true" />
               </folding>
@@ -91,7 +79,7 @@
       <file leaf-file-name="dbaas_client" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/dbaas_client">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
+            <state line="289" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -522,7 +510,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Experimental cmd interface with argparse" />
+    <option name="LAST_COMMIT_MESSAGE" value="add proper pretty print for ASCII table output" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -540,6 +528,7 @@
     <MESSAGE value="it finally works" />
     <MESSAGE value="Going for the win" />
     <MESSAGE value="Experimental cmd interface with argparse" />
+    <MESSAGE value="add proper pretty print for ASCII table output" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -552,7 +541,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/dbaas_client">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
+        <state line="289" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -601,7 +590,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/dbaas_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="224" column="65" selection-start="8727" selection-end="8727" vertical-scroll-proportion="-0.5700713">
+        <state line="146" column="9" selection-start="5750" selection-end="5750" vertical-scroll-proportion="-0.14845605">
           <folding>
             <element signature="e#625#640#0" expanded="true" />
           </folding>
