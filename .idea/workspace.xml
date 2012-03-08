@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5006cde2-9d1d-4c51-a432-5c6f7eb6aa32" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_dbaas_client.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/dbaas_client.py" afterPath="$PROJECT_DIR$/bin/dbaas_client.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/pprint_table.py" afterPath="$PROJECT_DIR$/utils/pprint_table.py" />
     </list>
     <ignored path="dbaas-client.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,9 +40,9 @@
       <file leaf-file-name="dbaas_client.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/dbaas_client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="25" selection-start="961" selection-end="961" vertical-scroll-proportion="0.38753057">
+            <state line="169" column="0" selection-start="6030" selection-end="6030" vertical-scroll-proportion="4.463028">
               <folding>
-                <element signature="e#625#640#0" expanded="true" />
+                <element signature="e#626#641#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,7 +69,7 @@
       <file leaf-file-name="pprint_table.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/pprint_table.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="1075" selection-end="1116" vertical-scroll-proportion="0.0">
+            <state line="22" column="33" selection-start="649" selection-end="649" vertical-scroll-proportion="-6.0">
               <folding />
             </state>
           </provider>
@@ -96,10 +95,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbaas_client" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bin/dbaas_client">
+      <file leaf-file-name="json_parsing.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/PycharmProjects/play_ground/json_parsing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="288" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
+            <state line="20" column="1644" selection-start="2068" selection-end="2068" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -147,18 +146,19 @@
         <option value="$PROJECT_DIR$/dbaasclient/client.py" />
         <option value="$USER_HOME$/PycharmProjects/play_ground/play_this" />
         <option value="$PROJECT_DIR$/utils/__init__.py" />
-        <option value="$PROJECT_DIR$/utils/pprint_table.py" />
         <option value="$PROJECT_DIR$/tests/test_dbaas_client.py" />
         <option value="$PROJECT_DIR$/tests/__init__.py" />
+        <option value="$USER_HOME$/PycharmProjects/play_ground/json_parsing.py" />
+        <option value="$PROJECT_DIR$/utils/pprint_table.py" />
         <option value="$PROJECT_DIR$/bin/dbaas_client.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="469" />
+    <option name="x" value="34" />
     <option name="y" value="22" />
     <option name="width" value="1735" />
-    <option name="height" value="1533" />
+    <option name="height" value="1024" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -283,7 +283,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="PyIntegratedToolsConfigurable" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -296,45 +296,7 @@
       <PyConsoleSettings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.dbaa_client">
-    <configuration default="false" name="dbaa_client" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../local/Cellar/python/2.7.2/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <module name="dbaas-client" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/dbaas_client.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="MULTIPROCESS" value="true" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="dbaas_cli" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../local/Cellar/python/2.7.2/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <module name="dbaas-client" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/dbaas_cli.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="MULTIPROCESS" value="true" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.pprint_table">
     <configuration default="false" name="play_this" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -386,6 +348,42 @@
       <module name="dbaas-client" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/pprint_table.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="MULTIPROCESS" value="true" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="json_parsing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../local/Cellar/python/2.7.2/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/PycharmProjects/play_ground" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="dbaas-client" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/PycharmProjects/play_ground/json_parsing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="MULTIPROCESS" value="true" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="dbaas_client" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../local/Cellar/python/2.7.2/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="dbaas-client" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/dbaas_client.py" />
       <option name="PARAMETERS" value="" />
       <option name="MULTIPROCESS" value="true" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -446,11 +444,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.dbaa_client" />
-      <item index="1" class="java.lang.String" itemvalue="Python.dbaas_cli" />
-      <item index="2" class="java.lang.String" itemvalue="Python.play_this" />
-      <item index="3" class="java.lang.String" itemvalue="Python's test.Unittests in play_this" />
-      <item index="4" class="java.lang.String" itemvalue="Python.pprint_table" />
+      <item index="0" class="java.lang.String" itemvalue="Python.play_this" />
+      <item index="1" class="java.lang.String" itemvalue="Python's test.Unittests in play_this" />
+      <item index="2" class="java.lang.String" itemvalue="Python.pprint_table" />
+      <item index="3" class="java.lang.String" itemvalue="Python.json_parsing" />
+      <item index="4" class="java.lang.String" itemvalue="Python.dbaas_client" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -481,19 +479,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="469" y="22" width="1735" height="1533" extended-state="0" />
-    <editor active="true" />
+    <frame x="34" y="22" width="1735" height="1024" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24896266" sideWeight="0.6520509" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24896266" sideWeight="0.74254143" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39941263" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32965687" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3479491" sideWeight="0.9965338" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25745857" sideWeight="0.9965338" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -538,7 +536,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="format code for better readability&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="code clean up in dbaascli init&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -558,6 +556,7 @@
     <MESSAGE value="Experimental cmd interface with argparse" />
     <MESSAGE value="add proper pretty print for ASCII table output" />
     <MESSAGE value="format code for better readability&#10;" />
+    <MESSAGE value="code clean up in dbaascli init&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -570,7 +569,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/dbaas_client">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="288" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
+        <state line="326" column="0" selection-start="25" selection-end="602" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -594,25 +593,9 @@
         <state line="13" column="0" selection-start="574" selection-end="574" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/play_ground/play_this">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="10" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#25#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/pprint_table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="1075" selection-end="1116" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -631,11 +614,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/play_ground/play_this">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="10" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#25#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/play_ground/json_parsing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="1644" selection-start="2068" selection-end="2068" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/pprint_table.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="33" selection-start="649" selection-end="649" vertical-scroll-proportion="-6.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bin/dbaas_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="25" selection-start="961" selection-end="961" vertical-scroll-proportion="0.38753057">
+        <state line="169" column="0" selection-start="6030" selection-end="6030" vertical-scroll-proportion="4.463028">
           <folding>
-            <element signature="e#625#640#0" expanded="true" />
+            <element signature="e#626#641#0" expanded="true" />
           </folding>
         </state>
       </provider>

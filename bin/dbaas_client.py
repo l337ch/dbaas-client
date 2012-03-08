@@ -8,7 +8,7 @@
 #
 # http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing, software
+# Unless required by applicable law or agreed  to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
@@ -29,6 +29,27 @@ class DBaaSCLI(httplib2.Http):
         self.token = token
         self.headers = {}
 
+    def resp_handler(self, resp, content, message=None):
+        resp_status = int(resp['status'])
+
+        #print resp_status
+        #print content
+
+        if resp_status >= 300:
+            if resp_status == 404:
+                print "\n" * 2 + "Resource " + message + " does not exist" + "\n" * 2
+            else:
+                print "\n" * 2 + "Something went horribly wrong" + "\n" * 2
+        else:
+            try:
+                result_json = json.loads(content)
+                #print result_json
+                self.json_pprint_table(result_json)
+            except:
+                print
+                print "Accepted for processing"
+                print
+
     def list_instances(self, instance_id=None):
         path = "instances"
 
@@ -40,25 +61,11 @@ class DBaaSCLI(httplib2.Http):
             list_uri = "/".join([self.url_part,path, instance_id])
 
         resp, content = super(DBaaSCLI, self).request(list_uri, "GET", headers=self.headers)
-        result_json = json.loads(content)
         #print result_json
 
+        #self.pprint_table(table)
 
-        if instance_id is None:
-            il = 0
-            table = [['instance_id', 'name', 'status']]
-            for instances in result_json['instances']:
-                row = result_json['instances'][il]
-                table.append([str(row['id']), str(row['name']), str(row['status'])])
-                il += 1
-        else:
-            table = [['instance_id', 'name', 'status', 'hostname', 'created']]
-
-            row = result_json['instance']
-            table.append([str(row['id']), str(row['name']), str(row['status']),
-                          str(row['hostname']), str(row['created'])])
-
-        self.pprint_table(table)
+        self.resp_handler(resp, content)
 
         return resp, content
 
@@ -81,45 +88,41 @@ class DBaaSCLI(httplib2.Http):
         resp, content = super(DBaaSCLI, self).request(create_uri, "POST", request_json.encode('utf-8'),
             headers=self.headers)
 
-        result_json = json.loads(content)
-        #print content
-        #print json.dumps(json.loads(content), indent=4)
-
-        table = [['instance_id', 'name', 'status', 'hostname', 'launchTime']]
-
-        row = result_json['instance']
-        table.append([str(row['id']), str(row['name']), str(row['status']), str(row['hostname']), str(row['created'])])
-
-        self.pprint_table(table)
+        self.resp_handler(resp, content)
 
         return resp, content
 
     def reset_password(self, instance_id, instance_password='null'):
         path = "instances"
-        reset_uri = "/".join([self.url_part, path, instance_id,'action'])
+        reset_uri = "/".join([self.url_part, path, instance_id,'resetpassword'])
         self.headers['Content-Type'] = 'application/json'
-        create_json = {'resetPassword':instance_password}
-        request_json = json.dumps(create_json)
 
-        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'),
+        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", body='',
             headers=self.headers)
 
-        print content
-        print json.dumps(json.loads(content), indent=4)
+        create_json = {'resetPassword':instance_password}
+
+        result_json = json.loads(content)
+
+        print
+        print "password = " + str(result_json['password': ])
+        print
+
+        #print json.dumps(json.loads(content), indent=4)
         return resp, content
 
     def restart_instance(self, instance_id, restart_type='SOFT'):
         path = "instances"
-        reset_uri = "/".join([self.url_part, path, instance_id, 'action'])
+        reset_uri = "/".join([self.url_part, path, instance_id, 'restart'])
         self.headers['Content-Type'] = 'application/json'
         create_json = {'restart':{'type':restart_type}}
         request_json = json.dumps(create_json)
 
-        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", request_json.encode('utf-8'),
+        resp, content = super(DBaaSCLI, self).request(reset_uri, "POST", body=None,
             headers=self.headers)
 
-        print content
-        print json.dumps(json.loads(content), indent=4)
+        self.resp_handler(resp, content, instance_id)
+
         return resp, content
 
     #create snapshot for a mysql instance
@@ -132,32 +135,25 @@ class DBaaSCLI(httplib2.Http):
         resp, content = super(DBaaSCLI, self).request(snap_uri, "POST", request_json.encode('utf-8'),
             headers=self.headers)
 
-        result_json = content
-        print result_json.split("\n")
-        print json.dumps(result_json, indent=4)
+        self.resp_handler(resp, content)
+
         return resp, content
 
     #describe snapshot for a mysql instance
     def describe_snapshot(self, instance_id=None):
         self.path = "snapshots"
         instance_id = instance_id
-        describe_uri = "/".join([self.url_part,self.path]) + "?instance_id=" + str(instance_id)
-        #print describe_uri
+        if instance_id is not None:
+            describe_uri = "/".join([self.url_part,self.path]) + "?instanceId=" + str(instance_id)
+        else:
+            describe_uri = "/".join([self.url_part,self.path])
 
+        #print describe_uri
         resp, content = super(DBaaSCLI, self).request(describe_uri, "GET", headers=self.headers)
-        result_json = json.loads(content)
 
         #print json.dumps(json.loads(content), indent=4)
 
-        il = 0
-        table = [['snapshot_id', 'name', 'status', 'instance_id', 'created']]
-        for instances in result_json['snapshots']:
-            row = result_json['snapshots'][il]
-            table.append([str(row['id']), str(row['name']), str(row['status']), str(row['instanceId']),
-                          str(row['created'])])
-            il += 1
-
-        self.pprint_table(table)
+        self.resp_handler(resp, content)
 
         return resp, content
 
@@ -166,10 +162,12 @@ class DBaaSCLI(httplib2.Http):
         self.path = "snapshots"
         snapshot_id = snapshot_id
         delete_uri = "/".join([self.url_part,self.path,snapshot_id])
-        print delete_uri
+        #print delete_uri
 
         resp, content = super(DBaaSCLI, self).request(delete_uri, "DELETE", headers=self.headers)
-        print content
+
+        self.resp_handler(resp, content, snapshot_id)
+
         return resp, content
 
     #delete mysql instance
@@ -177,16 +175,18 @@ class DBaaSCLI(httplib2.Http):
         self.instance_id = instance_id
         self.path = "instances"
         self.delete_uri = "/".join([self.url_part, self.path, self.instance_id])
-        print self.delete_uri
+        #print self.delete_uri
 
         resp, content = super(DBaaSCLI, self).request(self.delete_uri, "DELETE", headers=self.headers)
+
+        self.resp_handler(resp, content, instance_id)
+
         return resp, content
 
-    """
-    Creat some ASCII tables with dynamic column sizing per row
-    """
+
     def get_max_width(self, table, index):
-        #Get the maximum width of the given column
+        """Creat some ASCII tables with dynamic column sizing per row.
+        Get the maximum width of the given column"""
         return max([len(str(row[index])) for row in table])
 
     def pprint_table(self, table):
@@ -205,10 +205,10 @@ class DBaaSCLI(httplib2.Http):
         for row in table:
             row_cnt += 1
             # left col is justified left
-            print >> out, row[0].ljust(col_paddings[0] + 1),
-            # rest of the cols are justified right
+            print >> out, str(row[0]).ljust(col_paddings[0] + 1),
+            # rest of the cols are justified left also
             for i in range(1, len(row)):
-                col = str(row[i]).rjust(col_paddings[i] + 2)
+                col = str(row[i]).ljust(col_paddings[i] + 2)
                 print >> out, col,
             print >> out
             if row_cnt == 1:
@@ -216,9 +216,63 @@ class DBaaSCLI(httplib2.Http):
 
         print >> out
 
+    def parse_json_obj(self, json_object):
+        """Recursively search json_obj three levels deep. This is also
+        testing for list types. PLEASE REFACTOR"""
+        keys = []
+        values = []
+
+        for key1 in json_object:
+            v = []
+            k = []
+            #test for value of key1 is a dict
+            if isinstance(json_object[key1], dict):
+                json_1 = json_object[key1]
+                for key2 in json_1:
+                    #test for value of key2 is a dict
+                    if isinstance(json_1[key2], dict):
+                        for key3 in json_1[key2]:
+                            if key3 != 'links':
+                                k.insert(len(k), key3)
+                                v.insert(len(v), json_1[key2][key3])
+                    else:
+                        if key2 != 'links':
+                            k.insert(len(k), key2)
+                            v.insert(len(v), json_1[key2])
+                values.append(v)
+
+            #test to see if this is a list
+            elif isinstance(json_object[key1], list):
+                #iterate through the list
+                for index in json_object[key1]:
+                    v = []
+                    for key2 in index:
+                    #test for value of key2 is a dict
+                        if isinstance(index[key2], dict):
+                            for key3 in index[key2]:
+                                if key3 != 'links':
+                                    k.insert(len(k), key3)
+                        elif key2 != 'links':
+                            k.insert(len(k), key2)
+                            v.insert(len(v), index[key2])
+
+                    values.append(v)
+
+            else:
+                k.insert(len(keys), key1)
+                v.insert(len(v), json_object[key1])
+
+        keys = [ x for i,x in enumerate(k) if x not in k[i+1:]]
+        result_list = [keys] + values
+        return result_list
+    def json_pprint_table(self, content):
+        formated_list = self.parse_json_obj(content)
+
+        self.pprint_table(formated_list)
+
 class ArgDBaaSCLI(DBaaSCLI):
 
-    def __init__(self, url, token=None, api_version = "v1.0", timeout=30):
+    def __init__(self, url, token=None, api_version = "v1.0", timeout=60):
         super(DBaaSCLI, self).__init__(timeout=timeout)
         #print "Init DBaaS " + url
         self.url = url
@@ -241,7 +295,7 @@ class ArgDBaaSCLI(DBaaSCLI):
         self.restart_instance(opts.instance_id, opts.restart_type)
 
     def func_create_snapshot(self, opts):
-        self.create_snapshot(opts.instance_id, opts.snapshot_id)
+        self.create_snapshot(opts.instance_id, opts.snapshot_name)
 
     def func_list_snapshot(self, opts):
         self.describe_snapshot(opts.instance_id)
