@@ -318,7 +318,7 @@ class ArgDBaaSCLI(DBaaSCLI):
 
 
 dbaas_demo_url = "http://15.185.163.25:8775"
-dbaas = ArgDBaaSCLI(dbaas_demo_url, "kevin.mansel@hp.com:123")
+dbaas = ArgDBaaSCLI(dbaas_demo_url, "abc:123")
 
 dbaas_parser = argparse.ArgumentParser()
 dbaas_subparsers = dbaas_parser.add_subparsers()
@@ -391,20 +391,7 @@ terminate_instance_parser.set_defaults(func=dbaas.func_terminate_instance)
 
 def main(s=None):
     opts = dbaas_parser.parse_args(s)
-    #print "OPTS: " + str(opts)
     opts.func(opts)
 
 if __name__ == "__main__":
     main()
-    #main(['-h'])
-    #main(['list_instances'])
-    #main(['list_instances', '--instance_id', '5ceae7e4-6c5a-4f55-8db9-7fd4ae7416fe'])
-    #main(['create_instance', '--instance_name', 'mostly harmless'])
-    #main(['reset_password', '--instance_id', 'c2ff4133-c690-4ab4-9939-05db1bcd013c'])
-    #main(['restart_instance', '--instance_id', 'c2ff4133-c690-4ab4-9939-05db1bcd013c'])
-    #main(['list_snapshot'])
-    #main(['list_snapshot', '--instance_id', '57c32bf5-5011-413e-9749-27b03963c25e'])
-    #main(['create_snapshot', '--instance_id', '7100cdfa-badd-4469-a9c8-2e6603ea7e41',
-    # '--snapshot_name', 'back it up take seven'])
-    #main(['delete_snapshot', '--snapshot_id', 'b626a788-d689-484f-ab14-5469a6c9d526'])
-    #main(['terminate_instance', '--instance_id', '92f4af8d-4543-4941-85e2-a224fb67a313'])
