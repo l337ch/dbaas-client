@@ -1,0 +1,9 @@
+For fast, easy consumption...install these libraries before running.
+
+httplib2
+argparse
+
+ie : 
+
+$ easy_install httplib2
+$ easy_install argparse
