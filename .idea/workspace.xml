@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5006cde2-9d1d-4c51-a432-5c6f7eb6aa32" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/dbaas_client.py" afterPath="$PROJECT_DIR$/bin/dbaas_client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/pprint_table.py" afterPath="$PROJECT_DIR$/utils/pprint_table.py" />
     </list>
     <ignored path="dbaas-client.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -536,7 +534,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="code clean up in dbaascli init&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="pprettyprint is now working" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -557,6 +555,7 @@
     <MESSAGE value="add proper pretty print for ASCII table output" />
     <MESSAGE value="format code for better readability&#10;" />
     <MESSAGE value="code clean up in dbaascli init&#10;" />
+    <MESSAGE value="pprettyprint is now working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
