@@ -214,6 +214,10 @@ class DBaaSCLI(httplib2.Http):
             if row_cnt == 1:
                 print >> out, "=" * (sum(col_paddings) + (3*col_per_row))
 
+        print >> out, "=" * (sum(col_paddings) + (3*col_per_row))
+        print >> out
+        print >> out
+
         print >> out
 
     def parse_json_obj(self, json_object):
