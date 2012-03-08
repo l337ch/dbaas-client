@@ -147,15 +147,15 @@ class DBaaSCLI(httplib2.Http):
         return resp, content
 
     #describe snapshot for a mysql instance
-    def describe_snapshot(self, instance_id=None):
+    def describe_snapshot(self, opts):
         self.path = "snapshots"
-        instance_id = instance_id
-        if instance_id is not None:
-            describe_uri = "/".join([self.url_part,self.path]) + "?instanceId=" + str(instance_id)
+        instance_id = opts.instance_id or ''
+        snapshot_id = opts.snapshot_id
+        if snapshot_id is not None:
+            describe_uri = "/".join([self.url_part,self.path,str(snapshot_id)])
         else:
-            describe_uri = "/".join([self.url_part,self.path])
+            describe_uri = "/".join([self.url_part,self.path]) + "?instanceId=" + str(instance_id)
 
-        #print describe_uri
         resp, content = super(DBaaSCLI, self).request(describe_uri, "GET", headers=self.headers)
 
         #print json.dumps(json.loads(content), indent=4)
@@ -223,14 +223,7 @@ class DBaaSCLI(httplib2.Http):
                 print >> out, "=" * (sum(col_paddings) + (3*col_per_row))
 
         print >> out, "=" * (sum(col_paddings) + (3*col_per_row))
-<<<<<<< HEAD
         print >> out
-        print >> out
-
-=======
-
-        print >> out
->>>>>>> 4b43fd0096934211150f9791500d946783699983
         print >> out
 
     def parse_json_obj(self, json_object):
@@ -315,7 +308,7 @@ class ArgDBaaSCLI(DBaaSCLI):
         self.create_snapshot(opts.instance_id, opts.snapshot_name)
 
     def func_list_snapshot(self, opts):
-        self.describe_snapshot(opts.instance_id)
+        self.describe_snapshot(opts)
 
     def func_delete_snapshot(self, opts):
         self.delete_snapshot(opts.snapshot_id)
@@ -378,6 +371,8 @@ list_snapshot_parser = dbaas_subparsers.add_parser('list_snapshots',
     help='List all MySQL snapshots')
 list_snapshot_parser.add_argument('--instance_id', action='store',
     help='MySQL instance_id')
+list_snapshot_parser.add_argument('--snapshot_id', action='store',
+    help='Snapshot id')
 list_snapshot_parser.set_defaults(func=dbaas.func_list_snapshot)
 
 #delete snapshots
