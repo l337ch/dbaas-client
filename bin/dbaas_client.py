@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/bin/python env
 
 # Copyright 2012 HP Software, LLC"
 #
@@ -320,23 +320,23 @@ class ArgDBaaSCLI(DBaaSCLI):
 dbaas_demo_url = "http://15.185.163.25:8775"
 dbaas = ArgDBaaSCLI(dbaas_demo_url, "abc:123")
 
-dbaas_parser = argparse.ArgumentParser()
+dbaas_parser = argparse.ArgumentParser(description='Database as a Service commandline tool')
 dbaas_subparsers = dbaas_parser.add_subparsers()
 
 #list mysql instances
 list_instance_parser = dbaas_subparsers.add_parser('list_instances',
     help='List MySQL instances')
 list_instance_parser.add_argument('--instance_id', action='store',
-    required=False, help='MySQL instance_id')
+    required=False, help='Show MySQL instance details by ID')
 list_instance_parser.set_defaults(func=dbaas.func_list_instances)
 
 #create new mysql instance
 create_instance_parser = dbaas_subparsers.add_parser('create_instance',
     help='Create a new MySQL instance')
 create_instance_parser.add_argument('--instance_name', action='store',
-    required=True, help='Name for new MySQL instance')
+    required=True, help='Name for the new MySQL instance')
 create_instance_parser.add_argument('--snapshot_id', action='store',
-    help='Snapshot to use for MySQL creation')
+    help='Snapshot to use for MySQL instance creation')
 create_instance_parser.set_defaults(func=dbaas.func_create_instance)
 
 #reset mysql password
