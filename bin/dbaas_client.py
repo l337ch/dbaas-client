@@ -32,8 +32,9 @@ class DBaaSCLI(httplib2.Http):
     def resp_handler(self, resp, content, message=None):
         resp_status = int(resp['status'])
 
-        #print resp_status
-        #print content
+#        print resp_status
+#        print content
+#        print "---------"
 
         if resp_status >= 300:
             if resp_status == 404:
@@ -45,6 +46,12 @@ class DBaaSCLI(httplib2.Http):
                 result_json = json.loads(content)
                 #print result_json
                 self.json_pprint_table(result_json)
+            except IndexError:
+                print "No Resources Returned"
+                print
+#            except:
+#                print "Unexpected error:", sys.exc_info()[0]
+#                raise
             except:
                 print
                 print "Accepted for processing"
@@ -105,7 +112,7 @@ class DBaaSCLI(httplib2.Http):
         result_json = json.loads(content)
 
         print
-        print "password = " + str(result_json['password': ])
+        print "new password = " + str(result_json['password'])
         print
 
         #print json.dumps(json.loads(content), indent=4)
@@ -312,7 +319,7 @@ class ArgDBaaSCLI(DBaaSCLI):
 
 
 dbaas_demo_url = "http://15.185.163.25:8775"
-dbaas = ArgDBaaSCLI(dbaas_demo_url, "abc:123")
+dbaas = ArgDBaaSCLI(dbaas_demo_url, "kevin.mansel@hp.com:123")
 
 dbaas_parser = argparse.ArgumentParser()
 dbaas_subparsers = dbaas_parser.add_subparsers()
