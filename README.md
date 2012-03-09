@@ -22,9 +22,9 @@ Or use pip install if you prefer.
 
 Add the following to your environment:
 
-DBAAS_USERNAME=<dbaas username>
-DBAAS_PASSWORD=<dbaas password>
-DBAAS_ENDPOINT=<url to the dbaas server>
+    export DBAAS_USERNAME=<dbaas username>
+    export DBAAS_PASSWORD=<dbaas password>
+    export DBAAS_ENDPOINT=<url to the dbaas server>
 
 Implemented features
 --------------------
