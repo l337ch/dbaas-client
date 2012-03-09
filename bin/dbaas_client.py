@@ -321,11 +321,19 @@ class ArgDBaaSCLI(DBaaSCLI):
 
 DBAAS_USERNAME=os.environ.get('DBAAS_USERNAME')
 DBAAS_PASSWORD=os.environ.get('DBAAS_PASSWORD')
+DBAAS_ENDPOINT=os.environ.get('DBAAS_ENDPOINT')
 
 dbaas_demo_url = "http://15.185.163.25:8775"
 dbaas = ArgDBaaSCLI(dbaas_demo_url, DBAAS_USERNAME, DBAAS_PASSWORD)
 
 dbaas_parser = argparse.ArgumentParser(description='Database as a Service commandline tool')
+dbaas_parser.add_argument('--username',
+    default=DBAAS_USERNAME, help='DBaaS username, default to [DBAAS_USERNAME]')
+dbaas_parser.add_argument('--password',
+    default=DBAAS_USERNAME, help='DBaaS password, default to [DBAAS_PASSWORD]')
+dbaas_parser.add_argument('--endpoint',
+    default=DBAAS_PASSWORD, help='DBaaS endpoint, default to [DBAAS_ENDPOINT]')
+
 dbaas_subparsers = dbaas_parser.add_subparsers()
 
 #list mysql instances
