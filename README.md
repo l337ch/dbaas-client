@@ -6,15 +6,15 @@ For easy and fun client access to Database as a Service.
 Instructions
 ------------
 
-For fast, easy consumption...install these libraries before running.
+For fast, easy consumption...install these python libraries before running.
 
 httplib2
 argparse
 
 ie : 
 
-$ easy_install httplib2
-$ easy_install argparse
+    easy_install httplib2
+    easy_install argparse
 
 Or use pip install if you prefer.
 
