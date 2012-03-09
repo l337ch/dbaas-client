@@ -19,6 +19,7 @@ import argparse
 import httplib2
 import json
 import sys
+import os
 
 class DBaaSCLI(httplib2.Http):
 
@@ -282,14 +283,16 @@ class DBaaSCLI(httplib2.Http):
 
 class ArgDBaaSCLI(DBaaSCLI):
 
-    def __init__(self, url, token=None, api_version = "v1.0", timeout=60):
+    def __init__(self, url, username, password, api_version = "v1.0", timeout=60):
         super(DBaaSCLI, self).__init__(timeout=timeout)
         #print "Init DBaaS " + url
         self.url = url
+        self.username = username
+        self.password = password
         self.api_version = api_version
-        self.token = token
+        self.token =  ":".join([self.username, self.password])
         self.headers = {}
-        self.headers['X-Auth-Token'] = token
+        self.headers['X-Auth-Token'] = self.token
         self.url_part = "/".join([self.url,self.api_version,"dbaasapi"])
 
     def func_list_instances(self, opts):
@@ -316,9 +319,11 @@ class ArgDBaaSCLI(DBaaSCLI):
     def func_terminate_instance(self, opts):
         self.terminate_instance(opts.instance_id)
 
+DBAAS_USERNAME=os.environ.get('DBAAS_USERNAME')
+DBAAS_PASSWORD=os.environ.get('DBAAS_PASSWORD')
 
 dbaas_demo_url = "http://15.185.163.25:8775"
-dbaas = ArgDBaaSCLI(dbaas_demo_url, "abc:123")
+dbaas = ArgDBaaSCLI(dbaas_demo_url, DBAAS_USERNAME, DBAAS_PASSWORD)
 
 dbaas_parser = argparse.ArgumentParser(description='Database as a Service commandline tool')
 dbaas_subparsers = dbaas_parser.add_subparsers()
