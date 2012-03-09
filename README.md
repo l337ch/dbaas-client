@@ -1,3 +1,11 @@
+DBaaS Client
+============
+
+For easy and fun client access to Database as a Service.
+
+Instructions
+------------
+
 For fast, easy consumption...install these libraries before running.
 
 httplib2
@@ -8,7 +16,18 @@ ie :
 $ easy_install httplib2
 $ easy_install argparse
 
-Implemented features:
+Or use pip install if you prefer.
+
+### Environment
+
+Add the following to your environment:
+
+DBAAS_USERNAME=<dbaas username>
+DBAAS_PASSWORD=<dbaas password>
+DBAAS_ENDPOINT=<url to the dbaas server>
+
+Implemented features
+--------------------
 
 1.  Show list of instances
 2.  Show instance details
